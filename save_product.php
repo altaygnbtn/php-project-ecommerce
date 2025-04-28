@@ -4,10 +4,10 @@ include 'db.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $desc = $_POST['description'];
-    $price = $_POST['price'];
+    $price = $_POST['price']; 
 
     
-    $target_dir = "uploads/";
+    $target_dir = "uploads/"; 
     if (!is_dir($target_dir)) {
         mkdir($target_dir, 0777, true);
     }
