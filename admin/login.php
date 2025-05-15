@@ -1,13 +1,13 @@
 <?php
 session_start();
-require_once __DIR__ . '/admin/db.php';
+include 'admin/db.php';
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username'] ?? '');
+    $username = trim($_POST['username'] ?? ''); 
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
     if ($username !== '' && $email !== '' && $password !== '') {
-        $stmt = $conn->prepare('SELECT id, username, email, password FROM users WHERE username=? OR email=? LIMIT 1');
+        $stmt = $mysqli->prepare('SELECT id, username, email, password FROM users WHERE username=? OR email=? LIMIT 1');
         $stmt->bind_param('ss', $username, $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -42,7 +42,7 @@ button:hover{background:#218838}
 </style>
 </head>
 <body>
-<form method="post">
+<form method="post" action="login.php">
 <h2>Login</h2>
 <?php if($error!==''){echo'<div class="error">'.$error.'</div>';}?>
 <input type="text" name="username" placeholder="Username" required>
