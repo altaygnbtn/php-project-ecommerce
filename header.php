@@ -15,6 +15,8 @@
       <?= "|" ?>
       <a href="admin/add_product.php">Add Product</a>
       <?= "|" ?>
+      <a href="checkout.php">Checkout</a>
+      <?= "|" ?>
       <a href="admin/logout.php">Logout</a>
       
     </nav>

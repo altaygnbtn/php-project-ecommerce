@@ -94,6 +94,7 @@ if (!empty($_SESSION['cart'])) {
     echo "<br><a href='cart.php?action=empty'>Empty Cart</a>";
     echo '<br />';
     echo "<a href='store.php'>Continue Shopping</a>";
+    echo "<br><a href='checkout.php'>Checkout</a>";
     
 } else {
     echo "Your cart is empty.";
