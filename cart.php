@@ -1,7 +1,15 @@
+
 <?php
 session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
 include 'admin/db.php';
 include 'header.php';
+?>
+
+<?php
 
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();

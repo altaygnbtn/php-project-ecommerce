@@ -1,52 +1,62 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
-$success='';
-$error='';
-if($_SERVER['REQUEST_METHOD']==='POST'){
-    $name=trim($_POST['name']??'');
-    $surname=trim($_POST['surname']??'');
-    $email=trim($_POST['email']??'');
-    $password=$_POST['password']??'';
-    if($name!==''&&$surname!==''&&$email!==''&&$password!==''){
-        if(filter_var($email,FILTER_VALIDATE_EMAIL)){
-            $_SESSION['registered_user']=[$name,$surname,$email,password_hash($password,PASSWORD_BCRYPT)];
-            $success='Registration successful. You can now log in.';
-        }else{
-            $error='Invalid email';
+include 'db.php'; // this must initialize $mysqli
+
+$success = '';
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    if ($username !== '' && $email !== '' && $password !== '') {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error = 'Invalid email format';
+        } else {
+            // Check if username or email exists
+            $stmt = $mysqli->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
+            $stmt->bind_param('ss', $username, $email);
+            $stmt->execute();
+            $stmt->store_result();
+
+            if ($stmt->num_rows > 0) {
+                $error = 'Username or email already taken';
+            } else {
+                $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+                $stmt = $mysqli->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
+                $stmt->bind_param('sss', $username, $hashedPassword, $email);
+                if ($stmt->execute()) {
+                    $success = 'Registration successful. You can now log in.';
+                } else {
+                    $error = 'Error registering user';
+                }
+            }
         }
-    }else{
-        $error='All fields required';
+    } else {
+        $error = 'All fields are required';
     }
 }
 ?>
+
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Sign Up</title>
-<style>
-body{font-family:Arial,Helvetica,sans-serif;background:#f5f5f5;display:flex;justify-content:center;align-items:center;height:100vh;margin:0}
-form{background:#fff;padding:40px;border-radius:8px;box-shadow:0 4px 10px rgba(0,0,0,.1);width:320px}
-h2{text-align:center;margin-bottom:24px}
-input{width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:4px}
-button{width:100%;padding:10px;border:none;background:#007bff;color:#fff;border-radius:4px;font-size:16px;cursor:pointer}
-button:hover{background:#0069d9}
-.error{color:#e74c3c;text-align:center;margin-bottom:12px}
-.success{color:#28a745;text-align:center;margin-bottom:12px}
-</style>
-</head>
+<html>
+<head><title>Sign Up</title></head>
 <body>
-<form method="post">
 <h2>Sign Up</h2>
-<?php
-if($error!==''){echo'<div class="error">'.$error.'</div>';}
-if($success!==''){echo'<div class="success">'.$success.'</div>';}
-?>
-<input type="text" name="name" placeholder="Name" required>
-<input type="text" name="surname" placeholder="Surname" required>
-<input type="email" name="email" placeholder="Email" required>
-<input type="password" name="password" placeholder="Password" required>
-<button type="submit">Register</button>
+<?php if ($error) echo "<p style='color:red;'>$error</p>"; ?>
+<?php if ($success) echo "<p style='color:green;'>$success</p>"; ?>
+<form method="post" >
+    <input type="text" name="username" placeholder="Username" required><br>
+    <input type="email" name="email" placeholder="Email" required><br>
+    <input type="password" name="password" placeholder="Password" required><br>
+    <button type="submit">Register</button>
 </form>
 </body>
 </html>

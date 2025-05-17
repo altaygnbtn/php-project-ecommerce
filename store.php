@@ -1,9 +1,14 @@
 <?php
-
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
 include 'admin/db.php';
-include('header.php'); 
+include 'header.php';
+?>
 
-
+<?php
 $record = $mysqli->query("SELECT * FROM products");
 
 echo '<h2>Products</h2>';
