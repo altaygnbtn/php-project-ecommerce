@@ -18,10 +18,12 @@ if (!isset($_SESSION['cart'])) {
 // ADD TO CART
 if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     $product_id = (int) $_GET['id'];
+    $quantity = isset($_POST['quantity']) ? max(1, (int)$_POST['quantity']) : 1; // Get quantity from POST or default to 1
+
     
     // if product is already in cart, increment quantity
     if (isset($_SESSION['cart'][$product_id])) {
-        $_SESSION['cart'][$product_id]['quantity']++;
+        $_SESSION['cart'][$product_id]['quantity'] += $quantity;
     } else {
         // Get product from database
         $result = $mysqli->query("SELECT * FROM products WHERE id=$product_id");
@@ -31,7 +33,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
                 "name" => $product['name'],
                 "price" => $product['price'],
                 "image" => 'admin/' . $product['image'],
-                "quantity" => 1
+                "quantity" => $quantity
             );
         }
     }
@@ -90,6 +92,9 @@ if (!empty($_SESSION['cart'])) {
     echo "<tr><td colspan='3'>Grand Total</td><td colspan='2'>\$" . number_format($total, 2) . "</td></tr>";
     echo "</table>";
     echo "<br><a href='cart.php?action=empty'>Empty Cart</a>";
+    echo '<br />';
+    echo "<a href='store.php'>Continue Shopping</a>";
+    
 } else {
     echo "Your cart is empty.";
 }

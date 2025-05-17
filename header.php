@@ -10,7 +10,13 @@
     <h1>🛍️ My Shop</h1>
     <nav>
       <a href="store.php">Home</a>
+      <?= "|" ?>
       <a href="cart.php">Cart</a>
+      <?= "|" ?>
+      <a href="admin/add_product.php">Add Product</a>
+      <?= "|" ?>
+      <a href="admin/logout.php">Logout</a>
+      
     </nav>
   </header>
   <main>
