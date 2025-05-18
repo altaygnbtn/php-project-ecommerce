@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
@@ -59,8 +58,18 @@ if (isset($_GET['action']) && $_GET['action'] == 'empty') {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update']) && isset($_POST['update_id'], $_POST['quantity'])) {
     $update_id = (int) $_POST['update_id'];
     $new_quantity = max(1, (int) $_POST['quantity']); // ensure at least 1
-    if (isset($_SESSION['cart'][$update_id])) {
-        $_SESSION['cart'][$update_id]['quantity'] = $new_quantity;
+
+    // Fetch current stock from database
+    $result = $mysqli->query("SELECT stock FROM products WHERE id = $update_id");
+    if ($result && $row = $result->fetch_assoc()) {
+        $stock = (int)$row['stock'];
+        if ($new_quantity > $stock) {
+            $error = "Cannot update. Only $stock item(s) in stock.";
+        } else {
+            if (isset($_SESSION['cart'][$update_id])) {
+                $_SESSION['cart'][$update_id]['quantity'] = $new_quantity;
+            }
+        }
     }
 }
 
@@ -94,7 +103,8 @@ if (!empty($_SESSION['cart'])) {
     echo "<br><a href='cart.php?action=empty'>Empty Cart</a>";
     echo '<br />';
     echo "<a href='store.php'>Continue Shopping</a>";
-    echo "<br><a href='checkout.php'>Checkout</a>";
+    echo '<br />';
+    echo "<a href='checkout.php'>Checkout</a>";
     
 } else {
     echo "Your cart is empty.";
