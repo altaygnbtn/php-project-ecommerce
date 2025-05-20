@@ -18,6 +18,8 @@
       <a href="checkout.php">Checkout</a>
       <?= "|" ?>
       <a href="admin/logout.php">Logout</a>
+      <?= "|" ?>
+      <a href="admin/order_history.php">Order History</a>
       
     </nav>
   </header>
