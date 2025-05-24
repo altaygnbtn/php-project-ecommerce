@@ -11,10 +11,10 @@ include 'header.php';
 <?php
 
 if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = array(); //initializing the cart for storing the products
+    $_SESSION['cart'] = array(); //initializing the cart for storing the products as an array
 }
 
-//adding products to the cart
+// adding the products to the cart from the button click "add"
 if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     $product_id =  $_GET['id'];
     if (isset($_POST['quantity'])){
@@ -29,11 +29,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     if (isset($_SESSION['cart'][$product_id])) {
         $_SESSION['cart'][$product_id]['quantity'] += $quantity;
     } else {
-        // Get product from database
+        
         $result = $mysqli->query("SELECT * FROM products WHERE id=$product_id");
         if ($result && $result->num_rows > 0) {
-            $product = $result->fetch_assoc();
-            $_SESSION['cart'][$product_id] = array(
+            $product = $result->fetch_assoc(); // fetching the product details from the database
+            $_SESSION['cart'][$product_id] = array( 
                 "name" => $product['name'],
                 "price" => $product['price'],
                 "image" => 'admin/' . $product['image'],
@@ -45,15 +45,15 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     exit;
 }
 
-// REMOVE FROM CART
+//removing the products from the cart
 if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id'])) {
-    $product_id = (int) $_GET['id'];
-    unset($_SESSION['cart'][$product_id]);
+    $product_id =  $_GET['id'];
+    unset($_SESSION['cart'][$product_id]); //removing the product
     header("Location: cart.php");
     exit;
 }
 
-// EMPTY CART
+//removing all products
 if (isset($_GET['action']) && $_GET['action'] == 'empty') {
     unset($_SESSION['cart']);
     header("Location: cart.php");
@@ -79,11 +79,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update']) && isset($_P
 }
 
 // VIEW CART
-echo "<h2>Your Shopping Cart</h2>";
+echo "<h2>Shopping Cart</h2>";
 if (!empty($_SESSION['cart'])) {
     $total = 0;
     echo "<table border='1' cellpadding='10'>";
-    echo "<tr><th>Image</th><th>Name</th><th>Price</th><th>Qty</th><th>Total</th><th>Action</th></tr>";
+    echo "<tr><th>Image</th><th>Name</th><th>Price</th><th>Quantity</th><th>Total</th><th>Action</th></tr>";
 
     foreach ($_SESSION['cart'] as $id => $item) {
         $line_total = $item['price'] * $item['quantity'];
