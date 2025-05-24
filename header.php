@@ -19,7 +19,7 @@
       <?= "|" ?>
       <a href="admin/logout.php">Logout</a>
       <?= "|" ?>
-      <a href="admin/order_history.php">Order History</a>
+      <a href="order_history.php">Order History</a>
       
     </nav>
   </header>
