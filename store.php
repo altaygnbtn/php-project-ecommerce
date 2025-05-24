@@ -1,9 +1,17 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: admin/login.php");
+    exit;
+}
+echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "!";
+
 
 include 'admin/db.php';
-include('header.php'); 
+include 'header.php';
+?>
 
-
+<?php
 $record = $mysqli->query("SELECT * FROM products");
 
 echo '<h2>Products</h2>';
@@ -70,8 +78,9 @@ if (isset($_GET['error'])) {
     <div class="product-card">
         <img src="<?php echo 'admin/' . $row['image']; ?>" alt="<?php echo htmlspecialchars($row['name']); ?>">
         <strong><?php echo htmlspecialchars($row['name']); ?></strong>
-        <p><?php echo htmlspecialchars($row['description']); ?></p>
+        <p>Stock:<?php echo htmlspecialchars($row['stock']); ?></p>
         <strong>$<?php echo $row['price']; ?></strong>
+        <a href="product_detail.php?id=<?php echo $row['id']; ?>" style="background:#2196F3; color:white; padding:10px 20px; border-radius:5px; text-decoration:none; margin-right:10px;">View</a>
         <a href="cart.php?action=add&id=<?php echo $row['id']; ?>">Add to Cart</a>
     </div>
 <?php endwhile; ?>
