@@ -3,16 +3,16 @@ session_start();
 if(!isset($_SESSION['user_id'])){header('Location: login.php');exit;}
 require_once __DIR__.'/admin/db.php';
 $user_id=$_SESSION['user_id'];
-$stmt=$mysqli->prepare('SELECT o.id order_id,o.total,o.created_at,oi.qty,oi.price,p.name FROM orders o JOIN order_items oi ON o.id=oi.order_id JOIN products p ON oi.product_id=p.id WHERE o.user_id=? ORDER BY o.created_at DESC');
+$stmt=$mysqli->prepare('SELECT o.id,o.total,o.created_at,oi.quantity,oi.price,p.name FROM orders o JOIN order_items oi ON o.id=oi.order_id JOIN products p ON oi.product_id=p.id WHERE o.user_id=? ORDER BY o.created_at DESC');
 $stmt->bind_param('i',$user_id);
 $stmt->execute();
 $res=$stmt->get_result();
 $orders=[];
 while($r=$res->fetch_assoc()){
-    $id=$r['order_id'];
+    $id=$r['id'];
     $orders[$id]['total']=$r['total'];
     $orders[$id]['created']=$r['created_at'];
-    $orders[$id]['items'][]=['name'=>$r['name'],'qty'=>$r['qty'],'price'=>$r['price']];
+    $orders[$id]['items'][]=['name'=>$r['name'],'qty'=>$r['quantity'],'price'=>$r['price']];
 }
 ?>
 <!DOCTYPE html>
