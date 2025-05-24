@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: admin/login.php");
     exit;
 }
 include 'admin/db.php';
@@ -11,13 +11,18 @@ include 'header.php';
 <?php
 
 if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = array();
+    $_SESSION['cart'] = array(); //initializing the cart for storing the products
 }
 
-// ADD TO CART
+//adding products to the cart
 if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
-    $product_id = (int) $_GET['id'];
-    $quantity = isset($_POST['quantity']) ? max(1, (int)$_POST['quantity']) : 1; // Get quantity from POST or default to 1
+    $product_id =  $_GET['id'];
+    if (isset($_POST['quantity'])){
+        $quantity = max(1, (int)$_POST['quantity']); // fetching quanity amount from the form, setting mininum to 1
+    } else {
+        $quantity = 1; // default
+    }
+    
 
     
     // if product is already in cart, increment quantity

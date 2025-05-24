@@ -10,6 +10,11 @@ error_reporting(E_ALL);
     die("Failed to connect to MySQL: " . $mysqli->connect_error);
 }
 
+// $alter = $mysqli->query("ALTER TABLE products MODIFY stock INT UNSIGNED NOT NULL DEFAULT 0");
+// if (!$alter) {
+//     die("Error altering table: " . $mysqli->error);
+// }
+
 // $order = $mysqli->query("CREATE TABLE IF NOT EXISTS orders (
 //   id INT AUTO_INCREMENT PRIMARY KEY,
 //   user_id INT NOT NULL,
