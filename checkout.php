@@ -7,13 +7,13 @@ if (!isset($_SESSION['user_id'])) {
 include 'admin/db.php';
 include 'header.php';
 
-if (empty($_SESSION['cart'])) {
+if (empty($_SESSION['cart'])) { //check if cart is empty 
     echo "<h2>Your cart is empty.</h2>";
     echo "<a href='store.php'>Go to Store</a>";
     exit;
 }
 
-// Handle order submission
+// order submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
     $user_id = $_SESSION['user_id'];
     $total = 0;
@@ -21,13 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
         $total += $item['price'] * $item['quantity'];
     }
 
-    // Insert order
+    // inserting order into database using prepared statements to prevent sql injection
     $stmt = $mysqli->prepare("INSERT INTO orders (user_id, total, created_at) VALUES (?, ?, NOW())");
     $stmt->bind_param("id", $user_id, $total);
     $stmt->execute();
     $order_id = $stmt->insert_id;
 
-    // Insert order items
+    // inserting order items into database using prepared statements to prevent sql injection
     $stmt_item = $mysqli->prepare("INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)");
     foreach ($_SESSION['cart'] as $product_id => $item) {
         $stmt_item->bind_param("iiid", $order_id, $product_id, $item['quantity'], $item['price']);
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
     <tr>
         <th>Product</th>
         <th>Price</th>
-        <th>Qty</th>
+        <th>Quantity</th>
         <th>Total</th>
     </tr>
     <?php
@@ -77,4 +77,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
 </form>
 <br>
 <a href="cart.php">Back to Cart</a>
-<?php $mysqli->close(); ?>
+<?php $mysqli->close(); ?> 
