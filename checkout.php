@@ -4,8 +4,8 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: admin/login.php");
     exit;
 }
-include 'admin/db.php';
-include 'header.php';
+require_once 'admin/db.php';
+require 'header.php';
 
 if (empty($_SESSION['cart'])) { //check if cart is empty 
     echo "<h2>Your cart is empty.</h2>";
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
 </table>
 <br>
 <form method="post">
-    <button type="submit" name="checkout" style="padding:10px 30px; background:#4CAF50; color:white; border:none; border-radius:5px; font-size:16px;">Place Order</button>
+    <button type="submit" name="checkout" style="padding:10px 30px; background:#4CAF50; color:white; border:none; border-radius:5px; font-size:16px;">Make Payment</button>
 </form>
 <br>
 <a href="cart.php">Back to Cart</a>

@@ -4,8 +4,8 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: admin/login.php");
     exit;
 }
-include 'admin/db.php';
-include 'header.php';
+require_once 'admin/db.php';
+require 'header.php';
 ?>
 
 <?php

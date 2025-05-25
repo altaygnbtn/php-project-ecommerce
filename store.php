@@ -7,8 +7,8 @@ if (!isset($_SESSION['user_id'])) {
 echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "!";
 
 
-include 'admin/db.php';
-include 'header.php';
+require_once 'admin/db.php';
+require 'header.php';
 ?>
 
 <?php

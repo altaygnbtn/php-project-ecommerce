@@ -17,9 +17,13 @@
       <?= "|" ?>
       <a href="checkout.php">Checkout</a>
       <?= "|" ?>
-      <a href="admin/logout.php">Logout</a>
-      <?= "|" ?>
       <a href="order_history.php">Order History</a>
+       <?= "|" ?>
+      <a href?=""
+
+
+      <a href="admin/logout.php">Logout</a>
+      
       
     </nav>
   </header>
