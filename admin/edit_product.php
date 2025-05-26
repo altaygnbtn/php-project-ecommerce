@@ -53,3 +53,5 @@ $product = $result->fetch_assoc();
 <a href="manage_products.php">Back to Manage Products</a>
 <br>
 <a href="/store.php">Back to Store</a>
+
+<?php $mysqli->close();?>

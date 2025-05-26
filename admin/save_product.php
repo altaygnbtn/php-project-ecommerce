@@ -35,3 +35,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
+
+<?php $mysqli->close();?>

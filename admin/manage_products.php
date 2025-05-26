@@ -45,3 +45,5 @@ $result = $mysqli->query("SELECT * FROM products");
 <br>
 <br>
 <a href="/store.php">Back to Store</a>
+
+<?php $mysqli->close();?>

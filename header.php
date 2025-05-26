@@ -34,7 +34,7 @@ require_once 'admin/db.php';
         <a href="order_history.php">Order History</a>
           <?= "|" ?>
     <?php endif; ?>
-     <?= "|" ?>
+     
       <a href="admin/logout.php">Logout</a>
       
     </nav>

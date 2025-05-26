@@ -78,3 +78,22 @@ $mysqli = new mysqli('localhost', 'root', '', 'ecommerce', 3306);
 
     
 // $query = $mysqli->query("ALTER TABLE products ADD COLUMN IF NOT EXISTS stock INT DEFAULT 0");
+
+$shipment = $mysqli->query("CREATE TABLE IF NOT EXISTS shipment_addresses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    user_id INT NOT NULL,
+    address TEXT NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    postal_code VARCHAR(20) NOT NULL,
+    country VARCHAR(100) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+)");
+
+// if ($shipment) {
+//     echo 'Created table shipment_addresses successfully!';
+// } else {
+//     echo 'Error occurred on creating table shipment_addresses';
+// }
+

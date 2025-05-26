@@ -77,3 +77,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <p>Already have an account? <a href="login.php">Login here</a></p>
 </body>
 </html>
+
+<?php $mysqli->close();?>

@@ -67,3 +67,5 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
 </form>
 </body>
 </html>
+
+<?php $mysqli->close();?>
