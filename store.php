@@ -45,9 +45,7 @@ if (isset($_GET['error'])) {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: transform 0.2s;
     }
-    .product-card:hover {
-        transform: scale(1.05);
-    }
+    
     .product-card img {
         max-width: 100%;
         height: auto;
@@ -76,9 +74,9 @@ if (isset($_GET['error'])) {
 <div class="product-grid">
 <?php while ($row = $record->fetch_assoc()): ?>
     <div class="product-card">
-        <img src="<?php echo 'admin/' . $row['image']; ?>" alt="<?php echo htmlspecialchars($row['name']); ?>">
-        <strong><?php echo htmlspecialchars($row['name']); ?></strong>
-        <p>Stock:<?php echo htmlspecialchars($row['stock']); ?></p>
+        <img src="<?php echo 'admin/' . $row['image']; ?>" alt="<?php echo ($row['name']); ?>">
+        <strong><?php echo ($row['name']); ?></strong>
+        <p>Stock:<?php echo ($row['stock']); ?></p>
         <strong>$<?php echo $row['price']; ?></strong>
         <a href="product_detail.php?id=<?php echo $row['id']; ?>" style="background:#2196F3; color:white; padding:10px 20px; border-radius:5px; text-decoration:none; margin-right:10px;">View</a>
         <a href="cart.php?action=add&id=<?php echo $row['id']; ?>">Add to Cart</a>

@@ -1,10 +1,10 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
-  $mysqli = new mysqli('localhost', 'root', '', 'ecommerce', 3306);
+$mysqli = new mysqli('localhost', 'root', '', 'ecommerce', 3306);
 
  if ($mysqli->connect_errno) {
     die("Failed to connect to MySQL: " . $mysqli->connect_error);
@@ -14,6 +14,8 @@ error_reporting(E_ALL);
 // if (!$alter) {
 //     die("Error altering table: " . $mysqli->error);
 // }
+
+// $alter = $mysqli->query("ALTER TABLE users ADD COLUMN IF NOT EXISTS role ENUM('admin', 'user') DEFAULT 'user'");
 
 // $order = $mysqli->query("CREATE TABLE IF NOT EXISTS orders (
 //   id INT AUTO_INCREMENT PRIMARY KEY,

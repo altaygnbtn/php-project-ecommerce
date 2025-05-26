@@ -113,6 +113,7 @@ if (!empty($_SESSION['cart'])) {
     
 } else {
     echo "Your cart is empty.";
+    echo "<br><a href='store.php'>Go back to store</a>";
 }
 
 $mysqli->close();
