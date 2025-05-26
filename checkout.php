@@ -73,6 +73,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
 </table>
 <br>
 <form method="post">
+    <h3>Shipping Address</h3>
+    <table border="1" cellpadding="8" style="margin-bottom:20px;width:400px">
+        <tr><td>Street</td><td><input type="text" name="street" required style="width:100%"></td></tr>
+        <tr><td>ZIP & City</td><td><input type="text" name="zip" required style="width:100%"></td></tr>
+        <tr><td>Phone Number</td><td><input type="tel" name="phone" required style="width:100%"></td></tr>
+        <tr><td>Postal Address</td><td><input type="text" name="postal" required style="width:100%"></td></tr>
+    </table>
     <button type="submit" name="checkout" style="padding:10px 30px; background:#4CAF50; color:white; border:none; border-radius:5px; font-size:16px;">Make Payment</button>
 </form>
 <br>
