@@ -4,8 +4,8 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: admin/login.php");
     exit;
 }
-include 'admin/db.php';
-include 'header.php';
+require_once 'admin/db.php';
+require 'header.php';
 ?>
 
 <?php
@@ -105,14 +105,15 @@ if (!empty($_SESSION['cart'])) {
     }
     echo "<tr><td colspan='3'>Grand Total</td><td colspan='2'>\$" . number_format($total, 2) . "</td></tr>";
     echo "</table>";
-    echo "<br><a href='cart.php?action=empty'>Empty Cart</a>";
-    echo '<br />';
-    echo "<a href='store.php'>Continue Shopping</a>";
-    echo '<br />';
-    echo "<a href='checkout.php'>Checkout</a>";
+    echo "<br> <button style='padding:10px 30px; background:red; color:white; font-size:16px;'><a href='cart.php?action=empty'>Empty Cart</a></button>";
+    echo '<br /> <br />';
+    echo "<button style='padding:10px 30px; background:yellow; color:white; font-size:16px;'><a href='store.php'>Continue Shopping</a></button>";
+    echo '<br /> <br />';
+    echo "<button style='padding:10px 30px; background:yellow; color:white; font-size:16px;'><a href='checkout.php'>Checkout</a></button>";
     
 } else {
     echo "Your cart is empty.";
+    echo "<br><button style='padding:10px 30px; background:yellow; color:white; font-size:16px;'><a href='store.php'>Go back to store</a>";
 }
 
 $mysqli->close();

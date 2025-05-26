@@ -1,7 +1,7 @@
 <?php
 session_start();
-include 'admin/db.php';
-include 'header.php';
+require_once 'admin/db.php';
+require 'header.php';
 
 if (!isset($_GET['id'])) {
     echo "Product not found.";
