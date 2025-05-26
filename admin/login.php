@@ -4,14 +4,14 @@ require_once 'db.php';
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username'] ?? '');
+    $username = $_POST['username']; 
     $password = $_POST['password'] ?? '';
 
     if ($username !== '' && $password !== '') {
-        $stmt = $mysqli->prepare("SELECT id, username, email, password FROM users WHERE username = ? LIMIT 1");
-        $stmt->bind_param('s', $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $record = $mysqli->prepare("SELECT id, username, email, password FROM users WHERE username = ? LIMIT 1"); //using prepare statement to prevent sql injection
+        $record->bind_param('s', $username); //string parameter
+        $record->execute();
+        $result = $record->get_result();
 
         if ($row = $result->fetch_assoc()) {
             if (password_verify($password, $row['password'])) {
