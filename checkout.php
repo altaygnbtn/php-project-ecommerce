@@ -98,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
     <br>
     <button type="submit" name="checkout" style="padding:10px 30px; background:green; color:white; font-size:16px;" onclick="return confirm('Are you sure want to pay <?php echo "$" . $grand_total ?>')" >Make Payment</button>
 </form>
-<br>
-<a href="cart.php">Back to Cart</a>
+<br><br>
+<a href='cart.php' style='padding:12px 28px; background:#2196F3; color:#fff; font-size:17px; border:none; border-radius:6px; text-decoration:none; transition:background 0.2s;'>Back to Cart</a>
+
 <?php $mysqli->close(); ?>

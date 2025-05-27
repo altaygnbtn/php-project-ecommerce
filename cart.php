@@ -104,16 +104,23 @@ if (!empty($_SESSION['cart'])) {
               </tr>";
     }
     echo "<tr><td colspan='3'>Grand Total</td><td colspan='2'>\$" . number_format($total, 2) . "</td></tr>";
-    echo "</table>";
-    echo "<br> <button style='padding:10px 30px; background:red; color:white; font-size:16px;'><a href='cart.php?action=empty'>Empty Cart</a></button>";
-    echo '<br /> <br />';
-    echo "<button style='padding:10px 30px; background:yellow; color:white; font-size:16px;'><a href='store.php'>Continue Shopping</a></button>";
-    echo '<br /> <br />';
-    echo "<button style='padding:10px 30px; background:yellow; color:white; font-size:16px;'><a href='checkout.php'>Checkout</a></button>";
-    
+echo "</table>";
+
+// Improved button styles
+echo "<div style='margin-top:30px; display:flex; gap:18px; flex-wrap:wrap;'>";
+
+echo "<a href='cart.php?action=empty' style='padding:12px 28px; background:#e53935; color:#fff; font-size:17px; border:none; border-radius:6px; text-decoration:none; transition:background 0.2s;'> Empty Cart</a>";
+
+echo "<a href='store.php' style='padding:12px 28px; background:#2196F3; color:#fff; font-size:17px; border:none; border-radius:6px; text-decoration:none; transition:background 0.2s;'> Continue Shopping</a>";
+
+echo "<a href='checkout.php' style='padding:12px 28px; background:#43a047; color:#fff; font-size:17px; border:none; border-radius:6px; text-decoration:none; transition:background 0.2s;'>  Checkout</a>";
+
+echo "</div>";
 } else {
     echo "Your cart is empty.";
-    echo "<br><button style='padding:10px 30px; background:yellow; color:white; font-size:16px;'><a href='store.php'>Go back to store</a>";
+    echo '<br><br>';
+    echo "<a href='store.php' style='padding:12px 28px; background:#2196F3; color:#fff; font-size:17px; border:none; border-radius:6px; text-decoration:none;'>Go back to store</a>";
+
 }
 
 $mysqli->close();

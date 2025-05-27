@@ -14,7 +14,7 @@ require_once 'admin/db.php';
 <html>
 <body>
   <header>
-    <h1>🛍️ My Shop</h1>
+    <h1>🛍️ MyShop</h1>
     <nav>
       
       <a href="store.php">Home</a>

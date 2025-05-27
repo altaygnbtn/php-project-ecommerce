@@ -4,7 +4,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: admin/login.php");
     exit;
 }
-echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "!";
+echo "Welcome, " . ($_SESSION['username']) . "!";
 
 
 require_once 'admin/db.php';
@@ -115,9 +115,7 @@ if (isset($_GET['error'])) {
         display: inline-block;
         margin-top: 10px;
     }
-    .product-card a:hover {
-        background-color: #45a049;
-    }
+    
 </style>
 
 <div class="product-grid">
