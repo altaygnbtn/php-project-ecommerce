@@ -17,9 +17,24 @@ $record = $mysqli->query("SELECT * FROM products");
 echo '<h2>Products</h2>';
 
 
-
-
 ?>
+
+<form method="get" action="store.php" class="search-bar">
+    <input type="text" name="search" placeholder="Search for products..." value="<?php echo isset($_GET['search']) ? ($_GET['search']) : ''; ?>" class="search-input"> <!-- getting the search value from url -->
+    <button type="submit" class="search-btn">Search</button>
+</form>
+
+<?php
+$search = '';  
+if (isset($_GET['search']) && $_GET['search'] !== '') {
+    $search = $_GET['search']; //
+    $record = $mysqli->query("SELECT * FROM products WHERE name LIKE '%$search%'"); //searching the products by name
+
+} else {
+    $record = $mysqli->query("SELECT * FROM products");
+}
+?>
+
 
 <?php
 if (isset($_GET['success'])) {
@@ -28,9 +43,43 @@ if (isset($_GET['success'])) {
 if (isset($_GET['error'])) {
     echo '<p style="color: red;">Error adding product!</p>';
 }
+
+
 ?>
 
 <style>
+
+    .search-bar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 30px 0 20px 0;
+        gap: 10px;
+    }
+
+    .search-input {
+        padding: 12px 18px;
+        font-size: 12px;
+        border: 1px solid #bbb;
+        border-radius: 6px;
+        width: 200px;
+        transition: border-color 0.2s;
+
+    }
+    .search-input:focus {
+    border-color: #2196F3;
+    outline: none;
+    }
+    .search-btn {
+        padding: 12px 18px;
+        font-size: 12px;
+        background-color: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
     .product-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
