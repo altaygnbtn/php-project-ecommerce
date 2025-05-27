@@ -1,10 +1,13 @@
 <?php
 require_once 'admin/db.php';
 require 'header.php';
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 ?>
 
 <?php
 
+$product_id = $_GET['id'];
 
 //inserting reviews into the database
 if ( isset($_POST['submit_review']) && isset($_SESSION['user_id'])) {
@@ -24,7 +27,7 @@ if ( isset($_POST['submit_review']) && isset($_SESSION['user_id'])) {
 
 //displaying the product details
 
-$product_id = $_GET['id'];
+
 
 $result = $mysqli->query("SELECT * FROM products WHERE id = $product_id");
 
