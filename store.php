@@ -128,7 +128,7 @@ if (isset($_GET['error'])) {
         <p>Stock:<?php echo ($row['stock']); ?></p>
         <strong>$<?php echo $row['price']; ?></strong>
         <a href="product_detail.php?id=<?php echo $row['id']; ?>" style="background:#2196F3; color:white; padding:10px 20px; border-radius:5px; text-decoration:none; margin-right:10px;">View</a>
-        <a href="cart.php?action=add&id=<?php echo $row['id']; ?>">Add to Cart</a>
+        <?php if (($_SESSION['role']) !== 'admin'): ?><a href="cart.php?action=add&id=<?php echo $row['id']; ?>">Add to Cart</a> <?php endif; ?>
     </div>
 <?php endwhile; ?>
 </div>

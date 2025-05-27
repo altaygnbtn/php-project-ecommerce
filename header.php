@@ -24,8 +24,9 @@ require_once 'admin/db.php';
         <a href="admin/add_product.php">Add Product</a>
         <?= "|" ?>
         <a href="admin/manage_products.php">Manage Products</a>
+        <?= "|" ?>
      <?php endif; ?>
-      
+        
      <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'user'): ?>
         <a href="cart.php">Cart</a>
           <?= "|" ?>
