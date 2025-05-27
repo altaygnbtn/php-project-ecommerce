@@ -10,7 +10,7 @@ require_once 'db.php';
 if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
     $id = $_GET['id'];
     $mysqli->query("DELETE FROM products WHERE id = $id");
-    header("Location: manage_products.php"); //render itself
+    header("Location: manage_products.php"); //rendering itself to prevent resubmission
     exit;
 }
 

@@ -20,9 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) { //move the temporary stored file to the specified location
 
-        $stmt = $mysqli->prepare("INSERT INTO products (name, description, price, stock, image) VALUES (?, ?, ?, ?, ?)"); //prepared statements
-        $stmt->bind_param("ssdis", $name, $desc, $price, $stock, $target_file); //string, string, double, integer, string
-        $stmt->execute();
+        $save = $mysqli->prepare("INSERT INTO products (name, description, price, stock, image) VALUES (?, ?, ?, ?, ?)"); //prepared statements
+        $save->bind_param("ssdis", $name, $desc, $price, $stock, $target_file); //string, string, double, integer, string
+        $save->execute();
 
         header("Location: /store.php" ."?success=1"); //redirecting the user with the success message 
 
