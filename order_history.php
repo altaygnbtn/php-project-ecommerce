@@ -38,7 +38,7 @@ $orders = $mysqli->query("SELECT * FROM orders WHERE user_id = $user_id ORDER BY
                         while ($item = $items->fetch_assoc()):
                     ?>
                         <li>
-                            <?php echo htmlspecialchars($item['name']); ?> (x<?php echo $item['quantity']; ?>) - $<?php echo number_format($item['price'], 2); ?>
+                            <?php echo ($item['name']); ?> (x<?php echo $item['quantity']; ?>) - $<?php echo number_format($item['price'], 2); ?>
                         </li>
                     <?php endwhile; ?>
                     </ul>
