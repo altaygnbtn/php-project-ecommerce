@@ -14,7 +14,7 @@ require_once 'admin/db.php';
 <html>
 <body>
   <header>
-    <h1>🛍️ MyShop</h1>
+    <h1>🛍️ ShopEase</h1>
     <nav>
       
       <a href="store.php">Home</a>
@@ -33,6 +33,8 @@ require_once 'admin/db.php';
            <a href="checkout.php">Checkout</a>
           <?= "|" ?>
         <a href="order_history.php">Order History</a>
+          <?= "|" ?>
+        <a href="wishlist.php">Wishlist</a>
           <?= "|" ?>
     <?php endif; ?>
      

@@ -48,14 +48,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
 //removing the products from the cart
 if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id'])) {
     $product_id =  $_GET['id'];
-    unset($_SESSION['cart'][$product_id]); //removing the product
+    unset($_SESSION['cart'][$product_id]); //removing the product by destroying the session variable
     header("Location: cart.php");
     exit;
 }
 
 //removing all products
 if (isset($_GET['action']) && $_GET['action'] == 'empty') {
-    unset($_SESSION['cart']);
+    unset($_SESSION['cart']); //destroying the entire session
     header("Location: cart.php");
     exit;
 }
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update']) && isset($_P
     if ($result && $row = $result->fetch_assoc()) {
         $stock = (int)$row['stock'];
         if ($new_quantity > $stock) {
-            $error = "Cannot update. Only $stock item(s) in stock.";
+            $error = "Cannot update. Only $stock items in stock.";
         } else {
             if (isset($_SESSION['cart'][$update_id])) {
                 $_SESSION['cart'][$update_id]['quantity'] = $new_quantity;

@@ -108,3 +108,14 @@ $reviews = $mysqli->query("CREATE TABLE IF NOT EXISTS reviews (
 //     echo 'Error occurred on creating table shipment_addresses';
 // }
 
+
+$wishlist = $mysqli->query("CREATE TABLE IF NOT EXISTS wishlist (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_wishlist (user_id, product_id) #ensures a user can only have one product in their wishlist
+)");
+
+
+
