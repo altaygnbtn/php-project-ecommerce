@@ -8,7 +8,7 @@ require_once 'admin/db.php';
 <!DOCTYPE html>
 
 <head>
-  <title>My Shop</title>
+  <title>ShopEase</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <html>
