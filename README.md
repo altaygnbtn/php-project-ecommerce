@@ -37,18 +37,6 @@ ShopEase is a simple PHP & MySQL e-commerce web application. It allows users to 
 
    - Open phpMyAdmin or your MySQL client.
    - Create a new database, e.g., `shopease`.
-   - Import the provided SQL file (if available) or run the following to create the wishlist table:
-
-     ```sql
-     CREATE TABLE wishlist (
-         id INT AUTO_INCREMENT PRIMARY KEY,
-         user_id INT NOT NULL,
-         product_id INT NOT NULL,
-         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-         UNIQUE KEY unique_wishlist (user_id, product_id)
-     );
-     ```
-
    - Create other necessary tables (`users`, `products`, `orders`, `reviews`, etc.) as per your application schema.
 
 4. **Configure Database Connection**
@@ -84,9 +72,6 @@ php-ecommerce-project/
 └── ...
 ```
 
-## Screenshots
-
-_Add screenshots of your homepage, product detail, cart, wishlist, and admin panel here._
 
 ## License
 
@@ -94,4 +79,3 @@ This project is for educational purposes.
 
 ---
 
-**Enjoy using ShopEase!**
