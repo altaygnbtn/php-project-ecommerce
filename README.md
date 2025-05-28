@@ -57,10 +57,15 @@ ShopEase is a simple PHP & MySQL e-commerce web application. It allows users to 
 ```
 php-ecommerce-project/
 ├── admin/
+│   ├── uploads/
 │   ├── db.php
 │   ├── add_product.php
 │   ├── manage_products.php
-│   └── ...
+│   ├── save_product.php
+│   ├── edit_product.php
+│   ├── signup.php
+│   ├── logout.php
+│   └── login.php
 ├── cart.php
 ├── checkout.php
 ├── header.php
@@ -68,8 +73,7 @@ php-ecommerce-project/
 ├── product_detail.php
 ├── store.php
 ├── wishlist.php
-├── style.css
-└── ...
+
 ```
 
 
