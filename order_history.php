@@ -11,34 +11,34 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Fetch orders for the current user
+//fetch orders for the current user
 $orders = $mysqli->query("SELECT * FROM orders WHERE user_id = $user_id ORDER BY created_at DESC");
 ?>
 
 <h2>Your Order History</h2>
 
-<?php if ($orders->num_rows > 0): ?>
+<?php if ($orders->num_rows > 0): ?> <!-- checking if there are any order, if so then creating table -->
     <table border="1" cellpadding="10">
         <tr>
-            <th>Order ID</th>
+            <th>Order ID</th> <!-- headers -->
             <th>Date</th>
             <th>Total</th>
             <th>Items</th>
         </tr>
-        <?php while ($order = $orders->fetch_assoc()): ?>
+        <?php while ($order = $orders->fetch_assoc()): ?> <!-- fetching each order from result to be displayed -->
             <tr>
                 <td><?php echo $order['id']; ?></td>
                 <td><?php echo $order['created_at']; ?></td>
-                <td>$<?php echo number_format($order['total'], 2); ?></td>
-                <td>
+                <td>$<?php echo $order['total']; ?></td> 
+                <td> <!-- displaying the items in the order -->
                     <ul style="margin:0; padding-left:18px;">
                     <?php
                         $order_id = $order['id'];
-                        $items = $mysqli->query("SELECT oi.quantity, oi.price, p.name FROM order_items oi JOIN products p ON oi.product_id = p.id WHERE oi.order_id = $order_id");
+                        $items = $mysqli->query("SELECT oi.quantity, oi.price, p.name FROM order_items oi JOIN products p ON oi.product_id = p.id WHERE oi.order_id = $order_id"); //fetching items from order_items table using JOIN
                         while ($item = $items->fetch_assoc()):
                     ?>
                         <li>
-                            <?php echo ($item['name']); ?> (x<?php echo $item['quantity']; ?>) - $<?php echo number_format($item['price'], 2); ?>
+                            <?php echo ($item['name']); ?> (x<?php echo $item['quantity']; ?>) - $<?php echo $item['price']; ?>
                         </li>
                     <?php endwhile; ?>
                     </ul>
